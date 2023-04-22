@@ -62,4 +62,13 @@ final_auth=ast.literal_eval(aes_dec(session_key_V,data_recv[2:-1]))
 if(final_auth["timestamp"]==ts):
     print("Authentication Success!!")
 
+    # drivers_license={'Driver_number':'UP1520022020113','Name':'Shivaansh Mital','Date Of Issue':str(datetime.now()),"Validity":5,'Signature':'[301, 980, 619, 109, 909, 1056, 980, 405, 120, 909, 1056, 1056, 407, 301, 619, 436, 510, 415, 189, 709, 292, 407, 510, 109, 109, 301, 415, 619, 619, 120, 407, 189, 120, 619, 909, 909, 407, 980, 109, 301, 405, 709, 1056, 619, 120, 189, 415, 909, 619, 980, 980, 909, 1056, 109, 109, 189, 407, 100, 980, 189, 1056, 709, 189, 709]'}
+    drivers_license={'Driver_number':'UP1520022020113','Name':'Shivaansh Mital','Date Of Issue':'2023-04-22 12:38:31.505746',"Validity":5,'Signature':'[909, 189, 405, 109, 100, 292, 709, 436, 100, 292, 189, 436, 619, 100, 909, 436, 120, 415, 909, 189, 980, 301, 619, 189, 980, 510, 980, 980, 436, 415, 415, 189, 120, 100, 189, 909, 109, 510, 189, 301, 120, 292, 292, 189, 415, 436, 292, 619, 619, 292, 109, 407, 436, 301, 510, 415, 100, 415, 407, 100, 709, 415, 109, 619]'}
+
+    # client.send(str(aes_enc(session_key_V,json.dumps(drivers_license))).encode())
+    client.send(str(aes_enc(session_key_V,json.dumps(drivers_license))).encode())
+
+    status = client.recv(1024).decode()
+    status = aes_dec(session_key_V,status[2:-1])
+    print("Verification Status "+status)
 client.close()
