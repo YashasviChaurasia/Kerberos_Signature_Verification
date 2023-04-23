@@ -24,10 +24,10 @@ def verify_license(license):
     print(tempDict)
     tempDict = json.dumps(tempDict)
     signature = hashlib.sha256(tempDict.encode()).hexdigest()
-    signature = str(encrypt(signature,private_key))
-    print(signature)
-    print(license['Signature'])
-    if signature == license['Signature']:
+    # signature = str(encrypt(signature,private_key))
+    # print(signature)
+    # print(license['Signature'])
+    if signature == decrypt(ast.literal_eval(license['Signature']),public_key):
         return True
     else: 
         return False
