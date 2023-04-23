@@ -70,5 +70,6 @@ if(final_auth["timestamp"]==ts):
 
     status = client.recv(1024).decode()
     status = aes_dec(session_key_V,status[2:-1])
-    print("Verification Status "+status)
+    status = json.loads(status)
+    print("Verification Status "+status['VerificationStatus'])
 client.close()

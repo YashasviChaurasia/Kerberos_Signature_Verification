@@ -28,9 +28,17 @@ def verify_license(license):
     # print(signature)
     # print(license['Signature'])
     if signature == decrypt(ast.literal_eval(license['Signature']),public_key):
-        return True
+        tempDict ={}
+        tempDict['VerificationStatus'] = 'True'
+        tempDict['Timestamp'] = str(datetime.now())
+        tempDict["Duration"]:5
+        return json.dumps(tempDict)
     else: 
-        return False
+        tempDict ={}
+        tempDict['VerificationStatus'] = 'False'
+        tempDict['Timestamp'] = str(datetime.now())
+        tempDict["Duration"]:5
+        return json.dumps(tempDict)
 
 # generating keys and commenting that part
 # later if needed we can use it
